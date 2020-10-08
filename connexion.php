@@ -14,12 +14,12 @@
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_POSTFIELDS => "{\"filters\" : 
             [{\"column_name\":\"login\",
-            \"filter_predicate\":\"contains\",
+            \"filter_predicate\":\"is\",
             \"filter_term\":\"$_GET[txtlogin]\",
             \"filter_term_modifier\": \"\"},
             
             {\"column_name\":\"mdp\",
-            \"filter_predicate\":\"contains\",
+            \"filter_predicate\":\"is\",
             \"filter_term\":\"$_GET[txtmdp]\",
             \"filter_term_modifier\": \"\"}
             ],
@@ -43,12 +43,9 @@
             $affichage = json_decode($response, true);
 
             if(isset($affichage['rows'][0]['prof_id']))
-                echo $affichage['rows'][0]['Prenom'];
+                echo $affichage['rows'][0]['prenom'];
             else
                 echo "Login ou mot de passe invalide(s).";
         }
     }
-    else
-        echo "Login ou mot de passe invalide(s).";
-
 ?>
