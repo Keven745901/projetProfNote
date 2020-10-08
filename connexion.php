@@ -29,7 +29,7 @@ if(isset($_GET['btnconnexion']) && $_GET['txtlogin'] != "i" && $_GET['txtlogin']
     else {
         $affichage = json_decode($response, true);
 
-        if($affichage['rows'][0]['prof_id'] != "")
+        if(isset($affichage['rows'][0]['prof_id']))
             echo $affichage['rows'][0]['Prenom'];
         else
             echo "Login ou mot de passe invalide(s).";
