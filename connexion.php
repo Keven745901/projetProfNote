@@ -11,7 +11,7 @@ if(isset($_GET['btnconnexion']) && $_GET['txtlogin'] != "i" && $_GET['txtlogin']
         CURLOPT_TIMEOUT => 30,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_POSTFIELDS => "{\n\t\"filters\" : \n\t[{\n\t\t\"column_name\":\"login\",\n\t\t\n\t\t\"filter_predicate\":\"contains\",\n\t\t\n\t\t\"filter_term\":\"$_GET[txtlogin]\",\n\t\t\n\t\t\"filter_term_modifier\": \"\"\n\t}]\n}",
+        CURLOPT_POSTFIELDS => "{\"filters\" : [{\"column_name\":\"login\",\"filter_predicate\":\"contains\",\"filter_term\":\"$_GET[txtlogin]\",\"filter_term_modifier\": \"\"}]}",
         CURLOPT_HTTPHEADER => array(
             "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDIzNTY2MDgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.NKAke-X7-ICr1gulCb-rf9w68ZjgvOdNZPPZQWXB-y4",
             "content-type: application/json"
