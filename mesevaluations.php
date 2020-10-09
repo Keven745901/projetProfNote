@@ -1,10 +1,11 @@
 <?php
-if(isset($_GET['btnconnexion']))
+session_start();
+if(isset($_SESSION['professeur_id']))
 {
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://cloud.seatable.io/dtable-server/api/v1/dtables/100752978fa346039226dbe54a6a3a6a/filtered-rows/?table_name=Professeur",
+        CURLOPT_URL => "https://cloud.seatable.io/dtable-server/api/v1/dtables/100752978fa346039226dbe54a6a3a6a/filtered-rows/?table_name=Evaluation",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -12,14 +13,14 @@ if(isset($_GET['btnconnexion']))
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_POSTFIELDS => "{\"filters\" : 
-            [{\"column_name\":\"login\",
-            \"filter_predicate\":\"is\",
-            \"filter_term\":\"$_GET[txtlogin]\",
+            [{\"column_name\":\"libelle\",
+            \"filter_predicate\":\"contains\",
+            \"filter_term\":\"Ev\",
             \"filter_term_modifier\": \"\"},
             
-            {\"column_name\":\"mdp\",
-            \"filter_predicate\":\"is\",
-            \"filter_term\":\"$_GET[txtmdp]\",
+            {\"column_name\":\"libelle\",
+            \"filter_predicate\":\"contains\",
+            \"filter_term\":\"a\",
             \"filter_term_modifier\": \"\"}
             ],
             \"filter_conjunction\":\"And\"
@@ -40,20 +41,20 @@ if(isset($_GET['btnconnexion']))
     }
     else {
         $affichage = json_decode($response, true);
-
-        if(isset($affichage['rows'][0]['professeur_id'])) {
-            $_SESSION['professeur_id'] = $affichage['rows'][0]['professeur_id'];
-            echo $_SESSION['professeur_id'];
-            echo $affichage['rows'][0]['prenom'];
+        echo $response;
+        if(isset($affichage['rows'][0]['evaluation_id'])) {
+            echo "<br>";
+            echo $affichage['rows'][0]['libelle'];
+            echo "<br>";
+            echo $affichage['rows'][0]['evaluation_date'];
+            echo "<br>";
+            echo $affichage['rows'][0]['professeur_id'][0];
         }
         else
-            echo "Login ou mot de passe invalide(s).";
+            echo "Pas d'évaluations à afficher.";
     }
 }
-
-if(isset($_GET['btndeconnexion']))
-{
-    session_unset();
-    session_destroy();
+else{
+    echo "Pas connecté.";
 }
 ?>

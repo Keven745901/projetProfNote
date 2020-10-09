@@ -1,3 +1,9 @@
+<?php
+    session_start();
+?>
+<?php
+    require 'connexion.php';
+?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -12,7 +18,7 @@
         <br><br>
         <input type="submit" name="btnconnexion" value="Connexion">
         <br><br>
-        <?php require 'connexion.php' ?>
+        <input type="submit" name="btndeconnexion" value="Déconnexion">
     </form>
 </body>
 </html>
