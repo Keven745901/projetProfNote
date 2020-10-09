@@ -13,18 +13,11 @@ if(isset($_SESSION['professeur_id']))
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_POSTFIELDS => "{\"filters\" : 
-            [{\"column_name\":\"libelle\",
+            [{\"column_name\":\"professeur_id\",
             \"filter_predicate\":\"contains\",
-            \"filter_term\":\"Ev\",
-            \"filter_term_modifier\": \"\"},
-            
-            {\"column_name\":\"libelle\",
-            \"filter_predicate\":\"contains\",
-            \"filter_term\":\"a\",
+            \"filter_term\":\"$_SESSION[professeur_id]\",
             \"filter_term_modifier\": \"\"}
-            ],
-            \"filter_conjunction\":\"And\"
-            }",
+            ]}",
         CURLOPT_HTTPHEADER => array(
             "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDIzNTY2MDgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.NKAke-X7-ICr1gulCb-rf9w68ZjgvOdNZPPZQWXB-y4",
             "content-type: application/json"
