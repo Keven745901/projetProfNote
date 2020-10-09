@@ -1,5 +1,4 @@
 <?php
-
 if(isset($_GET['btnconnexion']))
 {
     $curl = curl_init();
@@ -7,6 +6,10 @@ if(isset($_GET['btnconnexion']))
     curl_setopt_array($curl, array(
         CURLOPT_URL => "https://cloud.seatable.io/dtable-server/api/v1/dtables/100752978fa346039226dbe54a6a3a6a/filtered-rows/?table_name=Professeur",
         CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_POSTFIELDS => "{\"filters\" : 
             [{\"column_name\":\"login\",
@@ -38,10 +41,18 @@ if(isset($_GET['btnconnexion']))
     else {
         $affichage = json_decode($response, true);
 
-        if(isset($affichage['rows'][0]['prof_id']))
+        if(isset($affichage['rows'][0]['professeur_id'])) {
+            $_SESSION['professeur_id'] = $affichage['rows'][0]['_id'];
             echo $affichage['rows'][0]['prenom'];
+        }
         else
             echo "Login ou mot de passe invalide(s).";
     }
+}
+
+if(isset($_GET['btndeconnexion']))
+{
+    session_unset();
+    session_destroy();
 }
 ?>
