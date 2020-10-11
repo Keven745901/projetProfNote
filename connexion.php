@@ -25,7 +25,7 @@ if(isset($_GET['btnconnexion']))
             \"filter_conjunction\":\"And\"
             }",
         CURLOPT_HTTPHEADER => array(
-            "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDIzNTY2MDgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.NKAke-X7-ICr1gulCb-rf9w68ZjgvOdNZPPZQWXB-y4",
+            "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2NjA2NzEsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.T-jAwcSalJm3NDhBR-A0ZukUNkSugcRLSgbAItNSDq8",
             "content-type: application/json"
         ),
     ));
@@ -40,10 +40,8 @@ if(isset($_GET['btnconnexion']))
     }
     else {
         $affichage = json_decode($response, true);
-
         if(isset($affichage['rows'][0]['professeur_id'])) {
             $_SESSION['professeur_id'] = $affichage['rows'][0]['professeur_id'];
-            echo $_SESSION['professeur_id'];
             echo $affichage['rows'][0]['prenom'];
         }
         else

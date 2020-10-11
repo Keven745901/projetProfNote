@@ -19,7 +19,7 @@ if(isset($_SESSION['professeur_id']))
             \"filter_term_modifier\": \"\"}
             ]}",
         CURLOPT_HTTPHEADER => array(
-            "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDIzNTY2MDgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.NKAke-X7-ICr1gulCb-rf9w68ZjgvOdNZPPZQWXB-y4",
+            "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2NjA2NzEsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.T-jAwcSalJm3NDhBR-A0ZukUNkSugcRLSgbAItNSDq8",
             "content-type: application/json"
         ),
     ));
@@ -34,14 +34,11 @@ if(isset($_SESSION['professeur_id']))
     }
     else {
         $affichage = json_decode($response, true);
-        echo $response;
         if(isset($affichage['rows'][0]['evaluation_id'])) {
-            echo "<br>";
-            echo $affichage['rows'][0]['libelle'];
-            echo "<br>";
-            echo $affichage['rows'][0]['evaluation_date'];
-            echo "<br>";
-            echo $affichage['rows'][0]['professeur_id'][0];
+            foreach ($affichage['rows'] as $item) {
+                echo "<a href='evaluation.php?$item[evaluation_id]'>" . $item['libelle'] . "</a> " . $item['evaluation_date'];
+                echo "<br>";
+            }
         }
         else
             echo "Pas d'évaluations à afficher.";
