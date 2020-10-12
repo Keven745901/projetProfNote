@@ -3,15 +3,15 @@ require "fonctions.php";
 if(isset($_GET['eval']))
 {
 
-    $eleves = reponseFiltree('Eleve','classe_code', $_GET['classe'], 'contains');
-    
+    $notes = reponseFiltree('Note','evaluation_id', $_GET['eval'], 'contains');
+
     $somme = 0;
     $nb = 0;
 
     echo "<h1>$_GET[libelle]</h1>";
     echo "<h2>Coefficient " . $_GET['coefficient'] . "</h2>";
-    foreach ($eleves['rows'] as $item) {
-        echo $item['prenom'];
+    foreach ($notes['rows'] as $item) {
+        echo $item['eleve_nom'] . " <input type='text' value='" . $item['valeur'] . "'>";
         echo "<br><br>";
         $nb = $nb + 1;
     }
