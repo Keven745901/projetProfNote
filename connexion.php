@@ -43,6 +43,7 @@ if(isset($_GET['btnconnexion']))
         $affichage = json_decode($response, true);
         if(isset($affichage['rows'][0]['professeur_id'])) {
             $_SESSION['professeur_id'] = $affichage['rows'][0]['professeur_id'];
+            $_SESSION['hidden_id'] = $affichage['rows'][0]['_id'];
             echo $affichage['rows'][0]['prenom'];
             echo "<input type='submit' name='btndeconnexion' value='Déconnexion'>";
         }
