@@ -1,6 +1,5 @@
 <?php
 require "fonctions.php";
-echo reponseFiltree('Note','valeur','','contains');
 	if(isset($_GET['eval']))
 	{
 		$notes = reponseFiltree('Note','evaluation_id',$_GET['eval'], 'contains');
@@ -37,14 +36,11 @@ curl_close($curl);
 
 if ($err) {
     echo "cURL Error #:" . $err;
-} else {
-    echo $response;
-}
-
+} 
 }
 
 ?>
-<form>
+<form action="mesevaluations.php">
     <textarea id="donnees_excel"></textarea>
     <br>
     <input type="button" value="Convertir" onclick="convertirTableau()"></input>
