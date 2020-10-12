@@ -58,8 +58,6 @@ $curl = curl_init();
     	if ($err) 
         	echo "Une erreur est survenue.";
 
-    	else
-    		echo $notesSupp;
 }
 
 
@@ -93,5 +91,5 @@ if (curl_errno($ch)) {
     echo 'Error:' . curl_error($ch);
 }
 curl_close($ch);
-//header("Location: mesevaluations.php");
+header("Location: mesevaluations.php");
 ?>

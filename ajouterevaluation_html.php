@@ -31,7 +31,7 @@ session_start();
     <select name="cboclasse">
         <?php
         foreach ($classe['rows'] as $item) {
-            echo "<option value='$item[_id]'>$item[libelle]</option>";
+            echo "<option value='$item[classe_code]'>$item[libelle]</option>";
             echo "<br>";
         }
         ?>
