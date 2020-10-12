@@ -2,9 +2,10 @@
 require "fonctions.php";
 if(isset($_GET['eval']))
 {
-    echo $_GET['classe'];
     //$notes = reponseFiltree('Evaluation','classe_id',$_GET['classe'], 'contains');
-    $eleves = reponseFiltree('Eleve','classe_id', 'sgfsdgCGC', 'contains');
+    $idClasse = reponseFiltree('Classe','_id', $_GET['classe'], 'contains');
+    $eleves = reponseFiltree('Eleve','classe_id', $idClasse['rows']['classe_id'], 'contains');
+
 
     $somme = 0;
     $nb = 0;
