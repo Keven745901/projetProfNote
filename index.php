@@ -6,13 +6,16 @@
 </head>
 <body>
     <form method="GET" action="index.php">
+        <?php
+        require 'connexion.php';
+        ?>
         <input type="text" name="txtlogin" placeholder="Login" required="required">
         <br>
         <input type="password" name="txtmdp" placeholder="Mot de passe" required="required">
         <br><br>
         <input type="submit" name="btnconnexion" value="Connexion">
         <br><br>
-        <?php require 'connexion.php' ?>
+        
     </form>
 </body>
 </html>

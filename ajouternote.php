@@ -7,8 +7,6 @@
     <form method="GET" action="ajouternote.php">
         <input type="text" name="valeur" placeholder="valeur" required="required">
         <br>
-        <input type="text" name="coefficient" placeholder="coefficient" required="required">
-        <br><br>
         <input type="submit" name="ajouter" value="Ajouter">
         <br><br>
     </form>
@@ -17,10 +15,10 @@
 
 <?php
 
-if(!isset($_GET['valeur']) && !isset($_GET['coefficient'])){
+if(!isset($_GET['valeur'])){
 	echo "Entrez les infos svp";
 }
-
+if(isset($_GET['ajouter'])){
 $ch = curl_init();
 
 curl_setopt($ch, CURLOPT_URL, 'https://cloud.seatable.io/dtable-server/api/v1/dtables/100752978fa346039226dbe54a6a3a6a/rows/');
@@ -29,8 +27,7 @@ curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS,
 	"{
 		\"row\": 
-			{\"valeur\": \"$_GET[valeur]\",
-			\"coefficient\": \"$_GET[coefficient]\"},
+			{\"valeur\": \"$_GET[valeur]\"},
 		\"table_name\": \"Note\"
 	}"
 );
@@ -46,4 +43,5 @@ if (curl_errno($ch)) {
 echo 'Error:' . curl_error($ch);
 }
 curl_close($ch);
+}
 ?>
