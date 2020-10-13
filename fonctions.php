@@ -29,7 +29,6 @@
 
     	if ($err) 
         	echo "Une erreur est survenue.";
-    	
     	return json_decode($response,true);
 	}
 

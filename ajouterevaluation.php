@@ -21,8 +21,6 @@ if(isset($_GET['btnvalider']) && isset($_SESSION['hidden_id']))
         echo 'Error:' . curl_error($ch);
     }
     else {
-        echo("Votre évaluation a bien été créée !");
-        echo "<br />";
         $eval = json_decode($result,true);
     }
     curl_close($ch);
