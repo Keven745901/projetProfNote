@@ -28,14 +28,26 @@
         echo "<h2>Coefficient " . $_GET['coefficient'] . "</h2>";
         $notes = reponseFiltree('Note','evaluation_id', $_GET['eval'], 'contains');
         $_SESSION['notes']=$notes;
+        $nb=0;
+        $tot=0;
         foreach ($notes['rows'] as $item) {
             if(!isset($item['valeur']))
                 $manote = "";
             else
                 $manote = $item['valeur'];
+
             echo $item['eleve_nom'] . " <input type='text' value='" . $manote . "' name='" . $item['eleve_id'][0] . "'>";
+            if($manote!='')
+            {
+            	$tot+=$manote;
+            	$nb+=1;
+            }
             echo "<br><br>";
-            $nb = $nb + 1;
+        }
+        if($nb>0){
+        	echo "Moyenne : " . round($tot/$nb,2);
+        	echo "<br>";
+        	echo "<br>";
         }
         echo "<input type='submit' name='btnsubmit' value='Envoyer'>";
         echo "</form>";
