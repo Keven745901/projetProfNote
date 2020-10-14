@@ -8,7 +8,7 @@ if(isset($_POST['btnconnexion']))
             $_SESSION['professeur_id'] = $affichage['rows'][0]['professeur_id'];
             $_SESSION['hidden_id'] = $affichage['rows'][0]['_id'];
             $_SESSION['prenom_professeur'] = $affichage['rows'][0]['prenom'];
-            echo "<input type='submit' name='btndeconnexion' value='Déconnexion'>";
+            header('Location: mesevaluations.php');
         }
         else
             echo "Login ou mot de passe invalide(s).";
