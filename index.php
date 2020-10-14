@@ -5,7 +5,7 @@
     <title>Connexion</title>
 </head>
 <body>
-    <form method="GET" action="index.php">
+    <form method="POST" action="index.php">
         <?php
         require 'connexion.php';
         ?>
@@ -15,7 +15,6 @@
         <br><br>
         <input type="submit" name="btnconnexion" value="Connexion">
         <br><br>
-        
     </form>
 </body>
 </html>
