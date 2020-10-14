@@ -1,6 +1,3 @@
-<?php
-    require 'connexion.php';
-?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -8,14 +5,17 @@
     <title>Connexion</title>
 </head>
 <body>
-    <form method="GET" action="index.php">
+    <form method="POST" action="index.php">
+        <?php
+        require 'connexion.php';
+        ?>
         <input type="text" name="txtlogin" placeholder="Login" required="required">
         <br>
         <input type="password" name="txtmdp" placeholder="Mot de passe" required="required">
         <br><br>
         <input type="submit" name="btnconnexion" value="Connexion">
         <br><br>
-        <input type="submit" name="btndeconnexion" value="Déconnexion">
+        
     </form>
 </body>
 </html>

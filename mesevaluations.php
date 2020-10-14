@@ -7,7 +7,7 @@ if(isset($_SESSION['professeur_id']))
 
     if(isset($evals['rows'][0]['evaluation_id'])) {
         foreach ($evals['rows'] as $item) {
-            echo "<a href='evaluation.php?eval=$item[evaluation_id]&libelle=$item[libelle]&coefficient=$item[coefficient]'>" . $item['libelle'] . "</a> " . $item['evaluation_date'] . " <a style='color:red' href='supprimereval.php?eval=$item[_id]'>Supprimer</a>";
+            echo "<a href='evaluation.php?eval=$item[evaluation_id]&libelle=$item[libelle]&coefficient=$item[coefficient]&classe=". $item['classe_code'] ."'>" . $item['libelle'] . "</a> " . $item['evaluation_date'] . " <a style='color:red' href='supprimereval.php?eval=$item[_id]'>Supprimer</a>";
             echo "<br>";
         }
     }
