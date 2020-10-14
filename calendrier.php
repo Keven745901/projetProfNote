@@ -38,6 +38,7 @@
 	var classes = [];
 	var couleurs = [];
 
+     scheduler.config.readonly = true;
      scheduler.init("scheduler_here", new Date(), "month");
      evalsProfJSON.forEach(item =>{
      	if(classes.includes(item['classe_id'][0])==false){
