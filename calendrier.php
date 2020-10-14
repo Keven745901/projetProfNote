@@ -49,7 +49,7 @@
      	var couleur = couleurs[index];
 
 		scheduler.parse([
-   		{id:i, start_date:item['evaluation_date'],end_date:item['evaluation_date'],text:"Evaluation", color:couleur}],"json");
+   		{id:i, start_date:item['evaluation_date'],end_date:item['evaluation_date'],text:item['classe_libelle'], color:couleur, textColor:"white"}],"json");
    		i = i + 1;
      });
      console.log(classes);
@@ -57,10 +57,10 @@
 
 
      function getRandomColor() {
-  var letters = '0123456789ABCDEF';
+  var letters = '0123456789AB';
   var color = '#';
   for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+    color += letters[Math.floor(Math.random() * 12)];
   }
   return color;
 }
