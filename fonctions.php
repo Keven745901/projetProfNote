@@ -1,6 +1,10 @@
 <?php
+require "token.php";
+
 	function reponseFiltree($table, $colonne, $filtre, $operateur){
+		global $token;
 		$curl = curl_init();
+		
 
     	curl_setopt_array($curl, array(
         CURLOPT_URL => "https://cloud.seatable.io/dtable-server/api/v1/dtables/100752978fa346039226dbe54a6a3a6a/filtered-rows/?table_name=" . $table,
@@ -17,13 +21,13 @@
             \"filter_term_modifier\": \"\"}
             ]}",
         CURLOPT_HTTPHEADER => array(
-            "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4",
+            "authorization: Token " . $token,
             "content-type: application/json"
         	),
     	));
     	$response = curl_exec($curl);
         $err = curl_error($curl);
-
+      
     	curl_close($curl);
 
     	if ($err) 
@@ -37,6 +41,7 @@ function random()
 }
 
 function majValeurNotes($notes){
+	global $token;
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, 'https://cloud.seatable.io/dtable-server/api/v1/dtables/100752978fa346039226dbe54a6a3a6a/rows/');
@@ -44,7 +49,7 @@ function majValeurNotes($notes){
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
 
     $headers = array();
-    $headers[] = "Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4";
+    $headers[] = "Authorization: Token " . $token;
     $headers[] = 'Accept: application/json';
     $headers[] = 'Content-Type: application/json';
 
@@ -69,6 +74,7 @@ function majValeurNotes($notes){
 
 
 function ajouterEval($libelle,$date,$coef){
+	global $token;
 $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, 'https://cloud.seatable.io/dtable-server/api/v1/dtables/100752978fa346039226dbe54a6a3a6a/rows/');
@@ -78,7 +84,7 @@ $ch = curl_init();
     curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n\n\t\"row\": {\"evaluation_id\":\"" . random() . "\",\"libelle\": \"" . $libelle . "\",\"evaluation_date\": \"" . $date . "\",\"coefficient\": \"" . $coef . "\"},\n\n\t\"table_name\": \"Evaluation\"\n\n}");
 
     $headers = array();
-    $headers[] = "Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4";
+    $headers[] = "Authorization: Token " . $token;
     $headers[] = 'Accept: application/json';
     $headers[] = 'Content-Type: application/json';
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -95,6 +101,7 @@ $ch = curl_init();
 }
 
 function ajouterLiensEval($evalID, $classeID, $hiddenID){
+	global $token;
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -107,7 +114,7 @@ function ajouterLiensEval($evalID, $classeID, $hiddenID){
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => "{\n\t\"table_name\": \"Evaluation\",\n\"other_table_name\": \"Classe\",\n\"link_id\": \"YqS4\",\n\"table_row_id\": \"" . $evalID . "\",\n\"other_table_row_id\": \"" . $classeID . "\"\n}\n",
         CURLOPT_HTTPHEADER => array(
-            "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4",
+            "authorization: Token " . $token,
             "content-type: application/json"
         ),
     ));
@@ -133,7 +140,7 @@ function ajouterLiensEval($evalID, $classeID, $hiddenID){
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => "{\n\t\"table_name\": \"Evaluation\",\n\"other_table_name\": \"Professeur\",\n\"link_id\": \"361V\",\n\"table_row_id\": \"" . $evalID . "\",\n\"other_table_row_id\": \"" . $hiddenID . "\"\n}\n",
         CURLOPT_HTTPHEADER => array(
-            "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4",
+            "authorization: Token " . $token,
             "content-type: application/json"
         ),
     ));
@@ -149,6 +156,7 @@ function ajouterLiensEval($evalID, $classeID, $hiddenID){
 }
 
 function initNotes($meseleves, $evalID){
+	global $token;
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, 'https://cloud.seatable.io/dtable-server/api/v1/dtables/100752978fa346039226dbe54a6a3a6a/rows/');
@@ -158,7 +166,7 @@ function initNotes($meseleves, $evalID){
     
 
     $headers = array();
-    $headers[] = "Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4";
+    $headers[] = "Authorization: Token " . $token;
     $headers[] = 'Accept: application/json';
     $headers[] = 'Content-Type: application/json';
     
@@ -199,6 +207,7 @@ function initNotes($meseleves, $evalID){
 
 function supprimerEvaluation($monEvaluation)
 {
+	global $token;
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, 'https://cloud.seatable.io/dtable-server/api/v1/dtables/100752978fa346039226dbe54a6a3a6a/rows/');
@@ -213,7 +222,7 @@ function supprimerEvaluation($monEvaluation)
     );
 
     $headers = array();
-    $headers[] = 'Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4';
+    $headers[] = 'Authorization: Token ' . $token;
     $headers[] = 'Accept: application/json';
     $headers[] = 'Content-Type: application/json';
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -227,6 +236,7 @@ function supprimerEvaluation($monEvaluation)
 
 function supprimerNotes()
 {
+	global $token;
     //récupération des notes dont l'éval est nulle dans une liste
     $curl = curl_init();
 
@@ -243,7 +253,7 @@ function supprimerNotes()
         \"filter_predicate\":\"is_empty\"}
         ]}",
     CURLOPT_HTTPHEADER => array(
-        "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4",
+        "authorization: Token " . $token,
         "content-type: application/json"
         ),
     ));
@@ -267,7 +277,7 @@ function supprimerNotes()
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 
     $headers = array();
-    $headers[] = 'Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4';
+    $headers[] = 'Authorization: Token ' . $token;
     $headers[] = 'Accept: application/json';
     $headers[] = 'Content-Type: application/json';
 
@@ -292,6 +302,7 @@ function supprimerNotes()
 
 function authentification($login,$mdp)
 {
+	global $token;
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -316,14 +327,14 @@ function authentification($login,$mdp)
             \"filter_conjunction\":\"And\"
             }",
         CURLOPT_HTTPHEADER => array(
-            "authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI2ODIxOTgsImR0YWJsZV91dWlkIjoiMTAwNzUyOTc4ZmEzNDYwMzkyMjZkYmU1NGE2YTNhNmEiLCJ1c2VybmFtZSI6ImJmODBlMTE5YzczYzQ5YjU4MTBhMGUxNjliNDEwZGU4QGF1dGgubG9jYWwiLCJwZXJtaXNzaW9uIjoicncifQ.0W4G8Y841meSF5prFFZIXArC6wUPHfeizVaF3-xlQI4",
+            "authorization: Token " . $token,
             "content-type: application/json"
         ),
     ));
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
-
+    echo $response;
     curl_close($curl);
 
     if ($err) {
