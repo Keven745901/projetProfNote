@@ -9,6 +9,7 @@
    <script src="scheduler/codebase/dhtmlxscheduler.js" type="text/javascript"></script>
    <link rel="stylesheet" href="scheduler/codebase/dhtmlxscheduler_material.css" 
         type="text/css">
+        <script src="scheduler/codebase/locale/locale_fr.js" charset="utf-8"></script>
 </head>
 <body>
 
