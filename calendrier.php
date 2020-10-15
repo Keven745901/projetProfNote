@@ -54,9 +54,6 @@
    		{id:i, start_date:item['evaluation_date'],end_date:item['evaluation_date'],text:item['classe_libelle'], color:couleur, textColor:"white"}],"json");
    		i = i + 1;
      });
-     console.log(classes);
-     console.log(couleurs);
-
 
      function getRandomColor() {
   var letters = '0123456789AB';
